@@ -3,7 +3,7 @@
 ## Nom du(des) étudiant(e)(s) de ce monôme/binôme 
 WARNING: NE PAS OUBLIER DE MENTIONNER LES DEUX NOMS SI VOUS ETES EN BINOME!
 
-#XXX# (et #YYY#)
+#TOURE Aboubacar# et #BELLEGRADE Angelo Garielle#
 
 Commentaires éventuels des étudiants : #XXXXXX#
 
@@ -54,11 +54,31 @@ docker run -it -e POSTGRES_PASSWORD=password -p 5432:5432 postgres
 ```
 *Expliquer cette ligne de commande (y compris les options utilisées)*
 
+Cette demarre un nouveau conteneur Docker de l'image postgres
+
+*Les options*
+
+**-it** :  lance le conteneur en mode interacif avec un terminal
+
+**-e POSTGRES_PASSWORD=password** : definie la variable d'environnement POSTGRES_PASSWORD avec la valeur password
+
+**-p 5432:5432** :  mappe le port 5432 du conteneur au port 5432 de la machine hôte
+
+
 * Compléter le code manquant dans la méthode `TodoListController.createTodoItem()`
 
 *Pourquoi `todoItemRepository` est-il `null` ? Quelle est la meilleure façon de l'injecter ?*
 
+Null
+
+La meilleure façon est de creer un service metier de l'injecter est d'utiliser l'annotation `@Auwired` 
+
 * Modifier le code en conséquence.
+
+```java
+@Autowired
+private TodoItemRepository todoItemRepository;
+```
 
 * Tester vos endpoints avec un client REST.
 
