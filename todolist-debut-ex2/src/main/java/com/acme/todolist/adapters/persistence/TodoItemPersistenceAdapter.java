@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import com.acme.todolist.application.port.out.LoadTodoItem;
@@ -20,23 +21,30 @@ import com.acme.todolist.domain.TodoItem;
 @Component
 public class TodoItemPersistenceAdapter implements LoadTodoItem,UpdateTodoItem {
 
-	private TodoItemRepository todoItemRepository;
+  private TodoItemRepository todoItemRepository;
 
-	private TodoItemMapper mapper;
+  private TodoItemMapper mapper;
 
-	@Inject
-	public TodoItemPersistenceAdapter(TodoItemRepository todoItemRepository, TodoItemMapper mapper) {
-		super();
-		this.todoItemRepository = todoItemRepository;
-		this.mapper = mapper;
-	}
+  @Inject
+  public TodoItemPersistenceAdapter(TodoItemRepository todoItemRepository, TodoItemMapper mapper) {
+    super();
+    this.todoItemRepository = todoItemRepository;
+    this.mapper = mapper;
+  }
 
-	@Override
-	public List<TodoItem> loadAllTodoItems() {
-		return this.todoItemRepository.findAll().stream()
-				.map(todoItemJpaEntory -> mapper.mapToTodoItem(todoItemJpaEntory)).collect(Collectors.toList());
-	}
+  @Override
+  public List<TodoItem> loadAllTodoItems() {
+    return this.todoItemRepository.findAll().stream()
+      .map(todoItemJpaEntory -> mapper.mapToTodoItem(todoItemJpaEntory)).collect(Collectors.toList());
+  }
 
-	// A compléter
+  
+
+  // A compléter
+  @Override
+  public void storeNewTodoItem(TodoItem item) {
+    TodoItemJpaEntity todoItemJpaEntity = mapper.mapToTodoItemJpaEntity(item);
+    this.todoItemRepository.save(todoItemJpaEntity);
+  }
 
 }
