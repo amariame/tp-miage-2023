@@ -19,6 +19,10 @@ public class TodoItemService {
     return  this.todoItemRepository.findById(id);
   }
   
+  public void updateTodoItem(TodoItem todoItem){
+    this.todoItemRepository.save(todoItem);
+  }
+  
   public void ajouteTache(TodoItem todoItem){
     this.todoItemRepository.save(todoItem);
   }
