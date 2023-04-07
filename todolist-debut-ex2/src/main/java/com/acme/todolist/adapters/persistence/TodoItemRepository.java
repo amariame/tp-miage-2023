@@ -15,6 +15,7 @@ public interface TodoItemRepository extends CrudRepository<TodoItemJpaEntity,Str
 	List<TodoItemJpaEntity> findAll(); 
 	
 	Optional<TodoItemJpaEntity> findById(String id);
-	
-	
+
+  @Override
+  TodoItemJpaEntity save(TodoItemJpaEntity item);
 }

@@ -13,6 +13,8 @@ public interface UpdateTodoItem {
 	 * Stocke un nouveau TodoItem
 	 * @param item
 	 */
-	void storeNewTodoItem(TodoItem item);
+	
 
+  // A compléter
+  void storeNewTodoItem(TodoItem item);
 }

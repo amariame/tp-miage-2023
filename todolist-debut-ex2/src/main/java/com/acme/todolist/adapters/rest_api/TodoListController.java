@@ -1,12 +1,16 @@
 package com.acme.todolist.adapters.rest_api;
 
+import java.io.DataInput;
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.acme.todolist.application.port.in.AddTodoItem;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.acme.todolist.application.port.in.GetTodoItems;
 import com.acme.todolist.domain.TodoItem;
@@ -23,7 +27,7 @@ public class TodoListController {
 	
 	private GetTodoItems getTodoItemsQuery;
 	// A compléter
-	
+	private AddTodoItem addTodoItemQuery;
 	
 	@Inject
 	//A compléter
@@ -39,8 +43,13 @@ public class TodoListController {
 	
 	// Endpoint de type POST vers "/todos"
 	// A compléter
-	public void ajouterItem(@RequestBody TodoItem item) {
-		// A compléter		
+
+  @PostMapping("/todos")
+  @ResponseStatus(code = HttpStatus.CREATED)
+  public ResponseEntity<Void> ajouterItem(@RequestBody TodoItem item) throws IOException {
+    
+    this.addTodoItemQuery.addTodoItem(item);
+    return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	
